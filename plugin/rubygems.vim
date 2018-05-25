@@ -1,5 +1,5 @@
 " ==============================================================
-" Description:  Vim plugin for gem command
+" Description:  Vim plugin for ruby `gem` command
 " Author:       Alexander Skachko <alexander.skachko@gmail.com>
 " Homepage:     https://github.com/lucerion/vim-rubygems
 " Version:      1.0.0
@@ -13,6 +13,10 @@ let g:loaded_rubygems = 1
 
 if !exists('g:rubygems_position')
   let g:rubygems_position = 'tab'
+endif
+
+if !exists('g:cd_to_gem_directory')
+  let g:cd_to_gem_directory = 1
 endif
 
 func! s:autocomplete(input, _command_line, _cursor_position) abort

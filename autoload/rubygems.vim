@@ -1,5 +1,5 @@
 " ==============================================================
-" Description:  Vim plugin for gem command
+" Description:  Vim plugin for ruby `gem` command
 " Author:       Alexander Skachko <alexander.skachko@gmail.com>
 " Homepage:     https://github.com/lucerion/vim-rubygems
 " Version:      1.0.0
@@ -32,6 +32,8 @@ func! rubygems#open(gem_name, position) abort
     return
   endif
 
-  exec l:position . ' ' . l:gem_path
-  exec 'lcd ' . fnamemodify(l:gem_path, ':p:h')
+  silent exec l:position . ' ' . l:gem_path
+  if g:cd_to_gem_directory
+    silent exec 'lcd ' . fnamemodify(l:gem_path, ':p:h')
+  endif
 endfunc
