@@ -15,10 +15,10 @@ if !exists('g:rubygems_position')
   let g:rubygems_position = 'tab'
 endif
 
-func! s:gem_name(input, command_line, cursor_position) abort
+func! s:autocomplete(input, _command_line, _cursor_position) abort
   let l:list = map(systemlist('gem list'), 'substitute(v:val, " (.*)", "", "g")')
   return filter(l:list, 'v:val =~ a:input')
 endfunc
 
 comm! -nargs=* Gem call rubygems#gem(<q-args>)
-comm! -nargs=* -complete=customlist,s:gem_name GemOpen call rubygems#open(<q-args>)
+comm! -nargs=1 -complete=customlist,s:autocomplete GemOpen call rubygems#open(<q-args>, g:rubygems_position)

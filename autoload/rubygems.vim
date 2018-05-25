@@ -6,7 +6,7 @@
 " Licence:      BSD-3-Clause
 " ==============================================================
 
-let s:buffer_positions = {
+let s:positions = {
   \ 'top':    'leftabove',
   \ 'bottom': 'rightbelow',
   \ 'left':   'vertical leftabove',
@@ -18,8 +18,8 @@ func! rubygems#gem(args) abort
   exec '!gem ' . a:args
 endfunc
 
-func! rubygems#open(gem_name) abort
-  let l:position = get(s:buffer_positions, g:rubygems_position, s:buffer_positions.tab)
+func! rubygems#open(gem_name, position) abort
+  let l:position = get(s:positions, a:position, s:positions.tab)
   let l:gem_path = substitute(system('gem which ' . a:gem_name), '\n', '', 'g')
 
   if l:gem_path =~ 'ERROR'
