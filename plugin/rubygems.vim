@@ -25,4 +25,4 @@ func! s:autocomplete(input, _command_line, _cursor_position) abort
 endfunc
 
 comm! -nargs=* Gem call rubygems#gem(<q-args>)
-comm! -nargs=1 -complete=customlist,s:autocomplete GemOpen call rubygems#open(<q-args>, g:rubygems_position)
+comm! -nargs=1 -complete=customlist,s:autocomplete GemOpen call rubygems#open(<q-args>, <q-mods>)

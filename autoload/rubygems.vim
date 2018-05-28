@@ -8,32 +8,38 @@
 
 let s:positions = {
   \ 'current':      'edit',
-  \ 'tab':          'tab split',
+  \ 'tab':          'tabedit',
   \ 'top':          'leftabove split',
   \ 'bottom':       'rightbelow split',
-  \ 'left':         'vertical leftabove split',
-  \ 'right':        'vertical rightbelow split',
+  \ 'left':         'leftabove vsplit',
+  \ 'right':        'rightbelow vsplit',
   \ 'top-full':     'topleft split',
   \ 'bottom-full':  'botright split',
-  \ 'left-full':    'vertical topleft split',
-  \ 'right-full':   'vertical botright split'
+  \ 'left-full':    'topleft vsplit',
+  \ 'right-full':   'botright vsplit'
   \ }
 
 func! rubygems#gem(args) abort
   exec '!gem ' . a:args
 endfunc
 
-func! rubygems#open(gem_name, position) abort
-  let l:position = get(s:positions, a:position, s:positions.tab)
+func! rubygems#open(gem_name, split) abort
   let l:gem_path = substitute(system('gem which ' . a:gem_name), '\n', '', 'g')
-
   if l:gem_path =~ 'ERROR'
     echohl ErrorMsg | echomsg l:gem_path | echohl None
     return
   endif
 
-  silent exec l:position . ' ' . l:gem_path
+  silent exec s:position(a:split) . ' ' . l:gem_path
   if g:cd_to_gem_directory
     silent exec 'lcd ' . fnamemodify(l:gem_path, ':p:h')
   endif
+endfunc
+
+func! s:position(split)
+  if len(a:split)
+    return a:split . ' split'
+  endif
+
+  return get(s:positions, g:rubygems_position, s:positions.tab)
 endfunc
