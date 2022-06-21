@@ -11,10 +11,6 @@ if exists('g:loaded_rubygems') || &compatible || v:version < 700
 endif
 let g:loaded_rubygems = 1
 
-if !exists('g:rubygems_position')
-  let g:rubygems_position = 'tab'
-endif
-
 if !exists('g:cd_to_gem_directory')
   let g:cd_to_gem_directory = 1
 endif
